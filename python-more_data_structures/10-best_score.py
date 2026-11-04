@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 def best_score(a_dictionary):
+     """Return the key with the highest integer value."""
     if not a_dictionary:
         return None
 
@@ -12,3 +13,4 @@ def best_score(a_dictionary):
             best_key = key
 
     return best_key
+
