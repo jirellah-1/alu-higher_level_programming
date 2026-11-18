@@ -1,0 +1,106 @@
+=================================
+Test cases for 7-base_geometry.py
+=================================
+
+This module defines a class BaseGeometry with an area method that is
+not implemented and an integer_validator method.
+
+Load the class and create an instance:
+>>> BaseGeometry = __import__('7-base_geometry').BaseGeometry
+>>> bg = BaseGeometry()
+
+Documentation is present:
+>>> len(__import__('7-base_geometry').__doc__) > 10
+True
+>>> len(BaseGeometry.__doc__) > 10
+True
+>>> len(BaseGeometry.area.__doc__) > 10
+True
+>>> len(BaseGeometry.integer_validator.__doc__) > 10
+True
+
+The area method is not implemented:
+>>> bg.area()
+Traceback (most recent call last):
+    ...
+Exception: area() is not implemented
+
+Valid values do not print or raise anything:
+>>> bg.integer_validator("my_int", 12)
+>>> bg.integer_validator("width", 89)
+>>> bg.integer_validator("one", 1)
+>>> bg.integer_validator("big", 10 ** 20)
+
+A string is not an integer:
+>>> bg.integer_validator("name", "John")
+Traceback (most recent call last):
+    ...
+TypeError: name must be an integer
+
+A float is not an integer:
+>>> bg.integer_validator("ratio", 3.5)
+Traceback (most recent call last):
+    ...
+TypeError: ratio must be an integer
+
+A boolean is not accepted:
+>>> bg.integer_validator("flag", True)
+Traceback (most recent call last):
+    ...
+TypeError: flag must be an integer
+>>> bg.integer_validator("flag", False)
+Traceback (most recent call last):
+    ...
+TypeError: flag must be an integer
+
+None, lists, tuples, sets and dictionaries are not integers:
+>>> bg.integer_validator("nothing", None)
+Traceback (most recent call last):
+    ...
+TypeError: nothing must be an integer
+>>> bg.integer_validator("a_list", [3])
+Traceback (most recent call last):
+    ...
+TypeError: a_list must be an integer
+>>> bg.integer_validator("a_tuple", (4,))
+Traceback (most recent call last):
+    ...
+TypeError: a_tuple must be an integer
+>>> bg.integer_validator("a_set", {3})
+Traceback (most recent call last):
+    ...
+TypeError: a_set must be an integer
+>>> bg.integer_validator("a_dict", {"a": 1})
+Traceback (most recent call last):
+    ...
+TypeError: a_dict must be an integer
+
+A negative float is a type error, because the type is checked first:
+>>> bg.integer_validator("neg_float", -3.5)
+Traceback (most recent call last):
+    ...
+TypeError: neg_float must be an integer
+
+Zero and negative integers are value errors:
+>>> bg.integer_validator("age", 0)
+Traceback (most recent call last):
+    ...
+ValueError: age must be greater than 0
+>>> bg.integer_validator("distance", -4)
+Traceback (most recent call last):
+    ...
+ValueError: distance must be greater than 0
+>>> bg.integer_validator("huge_negative", -10 ** 20)
+Traceback (most recent call last):
+    ...
+ValueError: huge_negative must be greater than 0
+
+Missing arguments:
+>>> bg.integer_validator("age")  # doctest: +IGNORE_EXCEPTION_DETAIL
+Traceback (most recent call last):
+    ...
+TypeError: integer_validator() missing 1 required positional argument: 'value'
+>>> bg.integer_validator()  # doctest: +IGNORE_EXCEPTION_DETAIL
+Traceback (most recent call last):
+    ...
+TypeError: integer_validator() missing 2 required positional arguments: 'name' and 'value'

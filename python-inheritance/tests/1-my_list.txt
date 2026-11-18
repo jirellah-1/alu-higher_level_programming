@@ -1,0 +1,76 @@
+============================
+Test cases for 1-my_list.py
+============================
+
+This module defines a class MyList that is a subclass of list and has
+a method print_sorted that prints the list in ascending order.
+
+Load the class:
+>>> MyList = __import__('1-my_list').MyList
+
+Documentation is present:
+>>> len(__import__('1-my_list').__doc__) > 10
+True
+>>> len(MyList.__doc__) > 10
+True
+>>> len(MyList.print_sorted.__doc__) > 10
+True
+
+It is a list:
+>>> issubclass(MyList, list)
+True
+>>> isinstance(MyList(), list)
+True
+
+Example of the project:
+>>> my_list = MyList()
+>>> my_list.append(1)
+>>> my_list.append(4)
+>>> my_list.append(2)
+>>> my_list.append(3)
+>>> my_list.append(5)
+>>> print(my_list)
+[1, 4, 2, 3, 5]
+>>> my_list.print_sorted()
+[1, 2, 3, 4, 5]
+>>> print(my_list)
+[1, 4, 2, 3, 5]
+
+Empty list:
+>>> empty = MyList()
+>>> empty.print_sorted()
+[]
+
+One element:
+>>> one = MyList([7])
+>>> one.print_sorted()
+[7]
+
+Negative numbers and zero:
+>>> neg = MyList([3, -1, -5, 0])
+>>> neg.print_sorted()
+[-5, -1, 0, 3]
+
+The original list is not changed:
+>>> print(neg)
+[3, -1, -5, 0]
+
+Duplicates:
+>>> dup = MyList([2, 2, 1, 1])
+>>> dup.print_sorted()
+[1, 1, 2, 2]
+
+Already sorted and reverse sorted:
+>>> asc = MyList([1, 2, 3])
+>>> asc.print_sorted()
+[1, 2, 3]
+>>> desc = MyList([3, 2, 1])
+>>> desc.print_sorted()
+[1, 2, 3]
+>>> print(desc)
+[3, 2, 1]
+
+Large numbers:
+>>> big = MyList([10 ** 20, -10 ** 20, 5])
+>>> big.print_sorted()
+[-100000000000000000000, 5, 100000000000000000000]
