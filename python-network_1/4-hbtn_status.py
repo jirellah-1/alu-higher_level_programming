@@ -1,9 +1,9 @@
 #!/usr/bin/python3
-"""Fetches https://alu-intranet.hbtn.io/status using the requests package."""
+"""Fetches the status page of the intranet using the requests package."""
 import requests
 
 if __name__ == "__main__":
-    response = requests.get("https://alu-intranet.hbtn.io/status")
+    response = requests.get("https://intranet.hbtn.io/status")
     body = response.text
     print("Body response:")
     print("\t- type: {}".format(type(body)))
