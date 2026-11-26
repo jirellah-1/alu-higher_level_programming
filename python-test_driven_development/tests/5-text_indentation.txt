@@ -1,0 +1,132 @@
+=====================================
+Test cases for 5-text_indentation.py
+=====================================
+
+This module defines the function text_indentation(text) that prints a text
+with 2 new lines after each of the characters . ? and :
+
+The function prints no new line at the end of a text that does not finish
+with one of these characters, so the tests add print() after those calls.
+
+Import the function:
+>>> text_indentation = __import__('5-text_indentation').text_indentation
+
+The module and the function are documented:
+>>> len(__import__('5-text_indentation').__doc__) > 10
+True
+>>> len(text_indentation.__doc__) > 10
+True
+
+A text that finishes with a dot:
+>>> text_indentation("Hello.")
+Hello.
+<BLANKLINE>
+
+A space after the dot is removed:
+>>> text_indentation("Hello. World"); print()
+Hello.
+<BLANKLINE>
+World
+
+Many spaces after the dot are removed:
+>>> text_indentation("Hello.    World"); print()
+Hello.
+<BLANKLINE>
+World
+
+The three characters:
+>>> text_indentation("Hi? Yes: ok. Bye"); print()
+Hi?
+<BLANKLINE>
+Yes:
+<BLANKLINE>
+ok.
+<BLANKLINE>
+Bye
+>>> text_indentation("a? b"); print()
+a?
+<BLANKLINE>
+b
+>>> text_indentation("a: b"); print()
+a:
+<BLANKLINE>
+b
+>>> text_indentation("a. b"); print()
+a.
+<BLANKLINE>
+b
+
+Only the three characters make a new line:
+>>> text_indentation("Hello, World"); print()
+Hello, World
+>>> text_indentation("Hello World!"); print()
+Hello World!
+
+Spaces at the beginning of the text are removed:
+>>> text_indentation("   Hello. World"); print()
+Hello.
+<BLANKLINE>
+World
+
+Spaces at the end of the text are removed:
+>>> text_indentation("Hello World   "); print()
+Hello World
+>>> text_indentation("Hello.   ")
+Hello.
+<BLANKLINE>
+
+A text with no special character:
+>>> text_indentation("Hello World"); print()
+Hello World
+
+Only one special character:
+>>> text_indentation(".")
+.
+<BLANKLINE>
+>>> text_indentation("?")
+?
+<BLANKLINE>
+>>> text_indentation(":")
+:
+<BLANKLINE>
+
+An empty text or a text of spaces prints nothing:
+>>> text_indentation("")
+>>> text_indentation("   ")
+
+A longer text:
+>>> text_indentation("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quonam modo? Utrum igitur tibi litteram videor an totas paginas commovere? Non autem hoc: igitur ne illud quidem.")
+Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+<BLANKLINE>
+Quonam modo?
+<BLANKLINE>
+Utrum igitur tibi litteram videor an totas paginas commovere?
+<BLANKLINE>
+Non autem hoc:
+<BLANKLINE>
+igitur ne illud quidem.
+<BLANKLINE>
+
+The text must be a string:
+>>> text_indentation(12)
+Traceback (most recent call last):
+    ...
+TypeError: text must be a string
+>>> text_indentation(None)
+Traceback (most recent call last):
+    ...
+TypeError: text must be a string
+>>> text_indentation(["Hello."])
+Traceback (most recent call last):
+    ...
+TypeError: text must be a string
+>>> text_indentation(3.5)
+Traceback (most recent call last):
+    ...
+TypeError: text must be a string
+
+The text is required:
+>>> text_indentation()  # doctest: +IGNORE_EXCEPTION_DETAIL
+Traceback (most recent call last):
+    ...
+TypeError: text_indentation() missing 1 required positional argument: 'text'

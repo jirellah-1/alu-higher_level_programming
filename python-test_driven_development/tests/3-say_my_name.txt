@@ -1,0 +1,79 @@
+=================================
+Test cases for 3-say_my_name.py
+=================================
+
+This module defines the function say_my_name(first_name, last_name="")
+that prints My name is <first name> <last name>.
+
+Import the function:
+>>> say_my_name = __import__('3-say_my_name').say_my_name
+
+The module and the function are documented:
+>>> len(__import__('3-say_my_name').__doc__) > 10
+True
+>>> len(say_my_name.__doc__) > 10
+True
+
+Normal names:
+>>> say_my_name("John", "Smith")
+My name is John Smith
+>>> say_my_name("Walter", "White")
+My name is Walter White
+>>> say_my_name("Mary Ann", "Van Dyke")
+My name is Mary Ann Van Dyke
+>>> say_my_name("A", "B")
+My name is A B
+
+A helper that returns exactly what is printed, with its spaces:
+>>> import contextlib, io
+>>> def captured(first, last=""):
+...     buf = io.StringIO()
+...     with contextlib.redirect_stdout(buf):
+...         say_my_name(first, last)
+...     return buf.getvalue()
+>>> captured("John", "Smith")
+'My name is John Smith\n'
+>>> captured("Bob")
+'My name is Bob \n'
+>>> captured("Bob", "")
+'My name is Bob \n'
+
+The first name must be a string:
+>>> say_my_name(12, "White")
+Traceback (most recent call last):
+    ...
+TypeError: first_name must be a string
+>>> say_my_name(None)
+Traceback (most recent call last):
+    ...
+TypeError: first_name must be a string
+>>> say_my_name(["John"], "Smith")
+Traceback (most recent call last):
+    ...
+TypeError: first_name must be a string
+
+The last name must be a string:
+>>> say_my_name("John", 5)
+Traceback (most recent call last):
+    ...
+TypeError: last_name must be a string
+>>> say_my_name("John", None)
+Traceback (most recent call last):
+    ...
+TypeError: last_name must be a string
+>>> say_my_name("John", ["Smith"])
+Traceback (most recent call last):
+    ...
+TypeError: last_name must be a string
+
+When both are wrong, the first name is reported:
+>>> say_my_name(1, 2)
+Traceback (most recent call last):
+    ...
+TypeError: first_name must be a string
+
+The first name is required:
+>>> say_my_name()  # doctest: +IGNORE_EXCEPTION_DETAIL
+Traceback (most recent call last):
+    ...
+TypeError: say_my_name() missing 1 required positional argument: 'first_name'
